@@ -28,12 +28,12 @@ Se você está procurando boas práticas de arquitetura... acho que você entrou
 
 Aqui está o índice dos pequenos sites e testes salvos até agora:
 
-| Pasta / Projeto | O que é / Descrição | Techs Usadas | Status |
+| Pasta / Projeto | O que é / Descrição | Status |
 | :--- | :--- | :---: | :---: |
-| `📂 exercicio-01` | Primeiro site feito no curso (Ainda sobrou amor) | `HTML` `CSS` | ✅ Funciona |
-| `📂 teste-js-dom` | Botão que muda de cor e faz coisas duvidosas | `JS` `HTML` | 🧪 Teste |
-| `📂 pagina-landing` | Layout fictício pra treinar responsividade | `CSS` `HTML` | 🎨 Bonitinho |
-| `📂 api-test-fetch` | Tentando puxar dados sem dar erro CORS | `JS` `Fetch` | 💥 Sob controle |
+| `📂 exercicio-01` | Primeiro site feito no curso (Ainda sobrou amor) | ✅ Funciona |
+| `📂 teste-js-dom` | Botão que muda de cor e faz coisas duvidosas | 🧪 Teste |
+| `📂 pagina-landing` | Layout fictício pra treinar responsividade | 🎨 Bonitinho |
+| `📂 api-test-fetch` | Tentando puxar dados sem dar erro CORS | 💥 Sob controle |
 
 *(Vou adicionando mais à medida que o curso avança e a bagunça aumenta!)*
 
