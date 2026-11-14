@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glossário - Listas de Definição</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@500;700&family=Inter:wght@300;400;600&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* FUNDO PRETO CONFORME PEDIDO */
+        body {
+            background-color: #000000;
+            color: #e4e4e7;
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Cartão estilo Dark Mode Neon */
+        .cartao {
+            background-color: #09090b;
+            border: 1px solid #27272a;
+            border-top: 4px solid #6366f1;
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 0 30px rgba(99, 102, 241, 0.15);
+        }
+
+        h1 {
+            font-size: 2em;
+            color: #ffffff;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #27272a;
+            padding-bottom: 10px;
+        }
+
+        /* Campo de Pesquisa (JavaScript) */
+        .campo-busca {
+            width: 100%;
+            padding: 12px 16px;
+            background-color: #18181b;
+            border: 1px solid #3f3f46;
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 0.95em;
+            margin-bottom: 25px;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .campo-busca:focus {
+            border-color: #6366f1;
+            box-shadow: 0 0 10px rgba(99, 102, 241, 0.3);
+        }
+
+        /* ESTILIZAÇÃO DAS TAGS DO SLIDE (<dl>, <dt>, <dd>) */
+        dl {
+            margin-top: 10px;
+        }
+
+        /* Tag <dt> -> Termo a ser definido */
+        dt {
+            font-family: 'Fira Code', monospace;
+            font-size: 1.1em;
+            font-weight: 700;
+            color: #818cf8;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        dt::before {
+            content: "▶";
+            font-size: 0.7em;
+            color: #6366f1;
+        }
+
+        /* Tag <dd> -> Definição do termo */
+        dd {
+            margin-left: 20px;
+            margin-top: 6px;
+            margin-bottom: 6px;
+            padding: 10px 14px;
+            background-color: #18181b;
+            border-left: 3px solid #6366f1;
+            border-radius: 0 8px 8px 0;
+            color: #a1a1aa;
+            font-size: 0.95em;
+            line-height: 1.5;
+            transition: all 0.2s ease;
+        }
+
+        dd:hover {
+            background-color: #27272a;
+            color: #ffffff;
+            transform: translateX(5px);
+        }
+
+        .destaque-busca {
+            background-color: #312e81 !important;
+            color: #ffffff !important;
+        }
+
+        .rodape {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 0.8em;
+            color: #52525b;
+        }
+    </style>
+</head>
+<body>
+
+    <main class="cartao">
+        <h1>Glossário</h1>
+
+        <!-- Campo para o JavaScript funcionar -->
+        <input type="text" id="inputBusca" class="campo-busca" placeholder="🔍 Digite para filtrar os termos..." onkeyup="buscarTermo()">
+
+        <dl id="glossario">
+            
+            <!-- HTML -->
+            <dt>HTML</dt>
+            <dd>Abreviação de Linguagem de Marcação de hipertexto.</dd>
+
+            <!-- Cão (1 termo com 2 definições) -->
+            <dt>Cão</dt>
+            <dd>Qualquer animal carnívoro pertencente a família Canidae.</dd>
+            <dd>As subespécies domesticadas da família Canidae, Canis lupus familiaris.</dd>
+
+            <!-- Suco de vaca, Cerveja de gato, Leite (3 termos para 1 definição) -->
+            <dt>Suco de vaca</dt>
+            <dt>Cerveja de gato</dt>
+            <dt>Leite</dt>
+            <dd>Um líquido branco produzido por vacas e usado para consumo humano.</dd>
+
+        </dl>
+
+        <div class="rodape">
+            Atividade Avaliativa 02 • Listas de Definição
+        </div>
+    </main>
+
+    <script>
+        function buscarTermo() {
+            const termoBusca = document.getElementById('inputBusca').value.toLowerCase();
+            const termos = document.querySelectorAll('dt');
+            const definicoes = document.querySelectorAll('dd');
+
+            // Limpa destaques anteriores se o campo estiver vazio
+            if (termoBusca === '') {
+                termos.forEach(dt => dt.classList.remove('destaque-busca'));
+                definicoes.forEach(dd => dd.classList.remove('destaque-busca'));
+                return;
+            }
+
+            // Destaca os termos (<dt>) correspondentes
+            termos.forEach(dt => {
+                if (dt.innerText.toLowerCase().includes(termoBusca)) {
+                    dt.classList.add('destaque-busca');
+                } else {
+                    dt.classList.remove('destaque-busca');
+                }
+            });
+
+            // Destaca as definições (<dd>) correspondentes
+            definicoes.forEach(dd => {
+                if (dd.innerText.toLowerCase().includes(termoBusca)) {
+                    dd.classList.add('destaque-busca');
+                } else {
+                    dd.classList.remove('destaque-busca');
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>

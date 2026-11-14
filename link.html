@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minhas Músicas no Spotify</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* FUNDO PRETO CONFORME SOLICITADO */
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: 'Montserrat', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 15px;
+        }
+
+        /* Cartão Container estilo Spotify */
+        .container {
+            background: #121212;
+            border: 1px solid #282828;
+            border-top: 5px solid #1DB954; /* Verde Spotify */
+            border-radius: 20px;
+            padding: 40px 30px;
+            max-width: 650px;
+            width: 100%;
+            box-shadow: 0 0 35px rgba(29, 185, 84, 0.25);
+        }
+
+        /* REQUISITO 1: Título <h1> */
+        h1 {
+            font-size: 1.8em;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* Parágrafo <p> */
+        p.descricao {
+            color: #b3b3b3;
+            font-size: 0.95em;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        /* Título das seções */
+        .secao-titulo {
+            font-size: 1.1em;
+            color: #1DB954;
+            margin-bottom: 15px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /*  Lista dos 3 Links de Texto */
+        .lista-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-bottom: 35px;
+        }
+
+        .lista-links li a {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px;
+            background-color: #181818;
+            border: 1px solid #282828;
+            border-radius: 12px;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95em;
+            transition: all 0.3s ease;
+        }
+
+        .lista-links li a:hover {
+            background-color: #282828;
+            border-color: #1DB954;
+            color: #1DB954;
+            transform: translateX(6px);
+        }
+
+        .icone-seta {
+            font-size: 1.1em;
+            color: #1DB954;
+        }
+
+        /* DESAFIO EXTRA: Imagem Clicável */
+        .secao-imagem-link {
+            text-align: center;
+            background-color: #181818;
+            padding: 25px;
+            border-radius: 16px;
+            border: 1px solid #282828;
+        }
+
+        .secao-imagem-link p {
+            color: #b3b3b3;
+            font-size: 0.85em;
+            margin-bottom: 15px;
+        }
+
+        /* Tag <a> envolvendo a tag <img> */
+        .link-imagem-container {
+            display: inline-block;
+            position: relative;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.7);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .link-imagem-container:hover {
+            transform: scale(1.04);
+            box-shadow: 0 12px 30px rgba(29, 185, 84, 0.4);
+        }
+
+        .link-imagem-container img {
+            display: block;
+            width: 100%;
+            max-width: 240px;
+            height: auto;
+            border-radius: 14px;
+        }
+
+        .overlay-play {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            font-weight: 700;
+            color: #ffffff;
+            gap: 8px;
+        }
+
+        .link-imagem-container:hover .overlay-play {
+            opacity: 1;
+        }
+
+        /* Rodapé */
+        .rodape {
+            text-align: center;
+            font-size: 0.8em;
+            color: #535353;
+            margin-top: 30px;
+        }
+
+        /* Toast de Notificação (JavaScript) */
+        #toast {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: #1DB954;
+            color: #000;
+            text-align: center;
+            border-radius: 30px;
+            padding: 12px 20px;
+            position: fixed;
+            z-index: 1000;
+            bottom: 30px;
+            font-weight: 700;
+            font-size: 0.9em;
+            box-shadow: 0 5px 20px rgba(29, 185, 84, 0.4);
+            opacity: 0;
+            transition: opacity 0.3s, bottom 0.3s;
+        }
+
+        #toast.mostrar {
+            visibility: visible;
+            opacity: 1;
+            bottom: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <main class="container">
+        
+        <!-- REQUISITO 1: Título principal (<h1>) -->
+        <h1>Minhas Músicas no Spotify</h1>
+
+        <!-- REQUISITO 2: Parágrafo (<p>) explicando o propósito -->
+        <p class="descricao">
+            Esta é a minha seleção musical no Spotify. Aqui reuni a minha playlist favorita, a música que mais estou ouvindo no momento e o perfil do meu artista predileto.
+        </p>
+
+        <div class="secao-titulo">Meus Links do Spotify</div>
+        
+        <!-- REQUISITO 3: 3 Links de Texto apontando para o Spotify com target="_blank" -->
+        <ul class="lista-links">
+            
+            <!-- LINK 1: PLAYLIST -->
+            <li>
+                <!-- ⬇️ COLE O LINK DA SUA PLAYLIST NO href="" ABAIXO ⬇️ -->
+                <a href="https://open.spotify.com" target="_blank" onclick="notificarClique('Abrindo Playlist no Spotify...')">
+                    <span>🟢 Minha Playlist Favorita</span>
+                    <span class="icone-seta">↗</span>
+                </a>
+            </li>
+
+            <!-- LINK 2: MÚSICA -->
+            <li>
+                <!-- ⬇️ COLE O LINK DA SUA MÚSICA NO href="" ABAIXO ⬇️ -->
+                <a href="https://open.spotify.com" target="_blank" onclick="notificarClique('Abrindo Música no Spotify...')">
+                    <span>🎧 Minha Música do Momento</span>
+                    <span class="icone-seta">↗</span>
+                </a>
+            </li>
+
+            <!-- LINK 3: ARTISTA -->
+            <li>
+                <!-- ⬇️ COLE O LINK DO SEU ARTISTA/BANDA NO href="" ABAIXO ⬇️ -->
+                <a href="https://open.spotify.com" target="_blank" onclick="notificarClique('Abrindo Perfil do Artista...')">
+                    <span>🎤 Meu Artista / Banda Favorito</span>
+                    <span class="icone-seta">↗</span>
+                </a>
+            </li>
+
+        </ul>
+
+
+        <!-- DESAFIO EXTRA: Imagem Clicável levando ao Spotify -->
+        <div class="secao-imagem-link">
+            <div class="secao-titulo" style="font-size: 0.95em; margin-bottom: 5px;">Desafio Extra: Imagem Clicável</div>
+            <p>Clique no card abaixo para abrir direto no Spotify:</p>
+
+            <!-- ⬇️ TAG <a> ENVOLVENDO A TAG <img> ⬇️ -->
+            <a href="https://open.spotify.com" target="_blank" class="link-imagem-container" title="Abrir no Spotify" onclick="notificarClique('Redirecionando para o Spotify...')">
+                
+                <img src="https://i.pinimg.com/1200x/18/15/23/181523647878c72690cba9ee7056a7af.jpg" 
+                     alt="Capa de Álbum do Spotify" 
+                     width="240" 
+                     height="240">
+                     
+                <div class="overlay-play">
+                    ▶ Ouvir no Spotify
+                </div>
+
+            </a>
+        </div>
+
+        <div class="rodape">
+            Atividade Avaliativa • Links em HTML
+        </div>
+
+    </main>
+
+    <!-- TOAST POPUP -->
+    <div id="toast"></div>
+
+    <script>
+        function notificarClique(mensagem) {
+            const toast = document.getElementById("toast");
+            toast.innerText = "🎶 " + mensagem;
+            toast.className = "mostrar";
+
+            setTimeout(function(){ 
+                toast.className = toast.className.replace("mostrar", ""); 
+            }, 2500);
+        }
+    </script>
+
+</body>
+</html>

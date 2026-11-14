@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+   
+    <title>Minha Página Pessoal</title>
+
+
+    <style>
+        /* Importando uma fonte do Google */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+       body {
+        font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #000000;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        color: #333;
+}
+        
+
+        /* Cartão principal centralizado */
+.cartao-perfil {
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 0 40px rgba(28, 17, 75, 0.5);
+    width: 100%;
+    max-width: 550px;
+    border-top: 6px solid #130c30;
+    transition: transform 0.3s ease;
+}
+
+        .cartao-perfil:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Estilo da mensagem de boas vindas do JS */
+        #saudacao {
+            text-align: center;
+            color: #040114;
+            font-size: 1.1em;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 1.6em;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+        }
+
+        /* Container para cada informação */
+        .info-grupo {
+            margin-bottom: 20px;
+            background: #f8f9fa;
+            padding: 15px 20px;
+            border-radius: 12px;
+            border-left: 4px solid #1a021a;
+            transition: background 0.3s;
+        }
+
+        .info-grupo:hover {
+            background: #f0f4f8;
+            border-left-color: #483c7a;
+        }
+
+        /* Pequeno título acima de cada parágrafo */
+        .rotulo {
+            display: block;
+            font-size: 0.8em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #7f8c8d;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        p {
+            font-size: 1.1em;
+            color: #2c3e50;
+            line-height: 1.5;
+            font-weight: 400;
+        }
+
+        .rodape {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 0.85em;
+            color: #95a5a6;
+        }
+    </style>
+</head>
+<body>
+
+    <main class="cartao-perfil">
+        
+        <!-- Elemento onde o Javascript vai injetar o Bom dia/Boa tarde/Boa noite (opcional) -->
+        <div id="saudacao">Olá!</div>
+        
+        <h1>Meu Perfil Acadêmico</h1>
+
+        
+        <div class="info-grupo">
+            <span class="rotulo">Nome Completo</span>
+            <!-- REQUISITO 4: Próprio par de tags <p></p> -->
+            <p>Francyellen Antero da Silva Pimenta</p>
+        </div>
+
+        <div class="info-grupo">
+            <span class="rotulo">E-mail</span>
+            <p>francyellen0pimenta@gmail.com</p>
+        </div>
+
+        <div class="info-grupo">
+            <span class="rotulo">Instituição</span>
+            <p>MARINA</p>
+        </div>
+
+        <div class="info-grupo">
+            <span class="rotulo">Curso e Disciplina</span>
+            <p>IA & Programação</p>
+        </div>
+
+        <div class="rodape">
+            Atividade Avaliativa 2
+        </div>
+
+    </main>
+
+    <!-- JavaScript Caprichado: Dá bom dia, boa tarde ou boa noite baseado na hora do computador -->
+    <script>
+        function atualizarSaudacao() {
+            const horaAtual = new Date().getHours();
+            let textoSaudacao = '';
+
+            if (horaAtual >= 5 && horaAtual < 12) {
+                textoSaudacao = 'Bom dia! ☀️';
+            } else if (horaAtual >= 12 && horaAtual < 18) {
+                textoSaudacao = 'Boa tarde! 🌤️';
+            } else {
+                textoSaudacao = 'Boa noite! 🌙';
+            }
+
+            document.getElementById('saudacao').innerText = textoSaudacao;
+        }
+
+        // Executa a função assim que a página carrega
+        atualizarSaudacao();
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frases do Seu Madruga</title>
+
+    <style>
+        /* Paleta de cores inspirada na roupa do Seu Madruga (Azul desbotado e tons neutros) */
+        :root {
+            --cor-fundo: #f4f1ea;
+            --cor-cartao: #ffffff;
+            --cor-texto: #333333;
+            --cor-destaque: #5c8eb0; 
+            --cor-sucesso: #d4edda;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        main {
+            background-color: var(--cor-cartao);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 600px;
+            width: 100%;
+            border-top: 6px solid var(--cor-destaque);
+        }
+
+        h1 {
+            color: var(--cor-destaque);
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.8em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Estilo da caixa onde ficam as frases */
+        .caixa-frase {
+            background-color: #f9f9f9;
+            border-left: 5px solid var(--cor-destaque);
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 0 8px 8px 0;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        /* Efeito de hover (quando passa o mouse) */
+        .caixa-frase:hover {
+            transform: translateX(8px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        /* Dica flutuante para o usuário saber que pode clicar */
+        .caixa-frase::after {
+            content: "Clique para copiar";
+            position: absolute;
+            bottom: -20px;
+            right: 0;
+            font-size: 0.75em;
+            color: #888;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .caixa-frase:hover::after {
+            opacity: 1;
+        }
+
+        /* Estilo dos parágrafos */
+        p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            font-style: italic;
+            margin: 0;
+            color: #555;
+        }
+
+        .rodape {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.9em;
+            color: #999;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <main>
+        <h1>Frases do Seu Madruga</h1>
+
+        
+        <!-- Frase 1 -->
+        <div class="caixa-frase" onclick="copiarFrase('frase1', this)" title="Clique para copiar">
+            <!-- REQUISITO 4 -->
+            <p id="frase1">"Sou um homem de muita barriga senhor sorte."</p>
+        </div>
+
+        <!-- Frase 2 -->
+        <div class="caixa-frase" onclick="copiarFrase('frase2', this)" title="Clique para copiar">
+            <!-- REQUISITO 5 -->
+            <p id="frase2">"Para aprender uma língua estrangeira você tem que primeiro estudar anatomia, porque anatomia estuda o corpo e a língua faz parte dele."</p>
+        </div>
+
+        <div class="rodape">
+            Atividade Avaliativa 1 
+        </div>
+    </main>
+
+    <script>
+        function copiarFrase(idFrase, elementoCaixa) {
+            // Pega o texto de dentro da tag <p>
+            const texto = document.getElementById(idFrase).innerText;
+
+            // Função moderna para copiar para a área de transferência
+            navigator.clipboard.writeText(texto).then(() => {
+                
+                // Feedback visual: Pisca verde para mostrar que copiou
+                const corOriginal = elementoCaixa.style.backgroundColor;
+                elementoCaixa.style.backgroundColor = 'var(--cor-sucesso)';
+                
+                // Muda o texto da dica temporariamente
+                const dicaOriginal = elementoCaixa.getAttribute('title');
+                elementoCaixa.setAttribute('title', 'Copiado!');
+
+                // Volta ao normal após 600 milissegundos
+                setTimeout(() => {
+                    elementoCaixa.style.backgroundColor = corOriginal;
+                    elementoCaixa.setAttribute('title', dicaOriginal);
+                }, 600);
+
+            }).catch(err => {
+                console.error('Erro ao copiar texto: ', err);
+            });
+        }
+    </script>
+
+</body>
+</html>
